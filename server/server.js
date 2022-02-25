@@ -20,11 +20,19 @@ const menuitemSchema = {
     category: String,
     price: Number,
     description: String
-}
+};
+
+const adminSchema ={
+    email: String,
+    password: String
+};
+
 // Should be retrieve 
 const Menuitem =  mongoose.model("Menuitem", menuitemSchema);
+const Admin = mongoose.model("Admin", adminSchema);
 
-// new route
+
+// query menu list
 app.route("/Menu")
 .get((req, res) => {
     Menuitem.find((err, foundMenuItems) => {
@@ -35,6 +43,8 @@ app.route("/Menu")
         }
     });
 });
+
+
 
 
 
