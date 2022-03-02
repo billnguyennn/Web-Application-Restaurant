@@ -26,8 +26,8 @@ function BasicTable() {
         setMenuItems(response);
     })
 
-    let edit = (e, a, f) => {
-        alert(e); alert(a); alert(f);
+    let edit = (e) => {
+        alert(e.title)
     }
 
     return (
