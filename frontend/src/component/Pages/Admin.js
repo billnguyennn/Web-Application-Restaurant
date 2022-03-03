@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import NavbarAdmin from "../Navbar/NavbarAdmin"
 
 const mdTheme = createTheme();
 
@@ -22,7 +21,6 @@ function DashboardContent() {
     }, []);
     return (
         <div>
-        <NavbarAdmin />
         <ThemeProvider theme={mdTheme}>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />

@@ -1,12 +1,12 @@
 export const NavItemsAdmin = [
     {
         title: 'Add New Menu Item',
-        url: 'add',
+        url: 'admin/add',
         cName: 'nav-links'
     },
     {
         title: 'Delete/Edit Menu Item',
-        url: 'menu',
+        url: 'admin/menu',
         cName: 'nav-links'
     },
     {

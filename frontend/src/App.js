@@ -8,17 +8,18 @@ import SignIn from "./component/Admin/SignIn";
 import Admin from "./component/Pages/Admin";
 import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
 import TableMenuAdmin from "./component/Admin/TableMenuAdmin";
-import NavbarAdmin from "./component/Pages/Admin"
-import { useState, useEffect } from "react";
+import NavbarAdmin from "./component/Navbar/NavbarAdmin";
 
 function App() {
-  // check if localStorage === 
-  const [logIn, setLogIn] = useState();
+
+  const logIn = localStorage.getItem('logInStatus');
   return (
+    
     <div className="App">
         
       <BrowserRouter >
-        <Navbar />
+        
+        {logIn ? <NavbarAdmin /> : <Navbar />}
         <Routes>
           <Route path="menu" element={<FoodSelection />} />
           <Route exact path="/" element={<Home />} />
