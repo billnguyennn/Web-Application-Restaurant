@@ -121,8 +121,7 @@ const adminSchema = new mongoose.Schema({
 const MenuItem = mongoose.model("Menuitem", menuitemSchema);
 const Admin = mongoose.model("Admin", adminSchema);
 
-app
-  .route("/menu")
+app.route("/menu")
 
   // query menu list
   .get((req, res) => {
@@ -149,7 +148,24 @@ app
         }
       }
     );
-  });
+  })
+// delete item from db
+.delete((req, res) => {
+  MenuItem.findOneAndRemove(
+    {
+      _id:req.params.id
+    },
+    function(err, deletedMenuItem){
+      if(deletedMenuItem){
+        res.send(true);
+      } else{
+        res.send(false);
+      }
+    }
+    
+  )
+});
+
 
 app.route("/admin").post((req, res) => {
   const username = req.body.username;
