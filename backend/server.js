@@ -1,80 +1,3 @@
-/*----------------------------------------------------------------------------------
-
-
-
-                        ALTERNATIVE WAY
-
-
-
-
-----------------------------------------------------------------------------------*/
-
-// //require framework
-// const express = require('express');
-// const cors = require("cors");
-// const dbConfig = require("./app/config/db.config");
-// const app = express();
-// var corsOptions = {
-//     origin: "http://localhost:4200"
-// };
-// app.use(cors(corsOptions));
-// // parse requests of content-type - application/json
-// app.use(express.json());
-// // parse requests of content-type - application/x-www-form-urlencoded
-// app.use(express.urlencoded({ extended: true }));
-
-// const db = require("./app/models");
-// const Role = db.role;
-// db.mongoose
-// .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true
-//     })
-//     .then(() => {
-//         console.log("Successfully connect to MongoDB.");
-//         initial();
-//     })
-//     .catch(err => {
-//         console.error("Connection error", err);
-//         process.exit();
-//     });
-// // simple route
-
-// app.get("/", (req, res) => {
-//     res.json({ message: "Welcome to BB restaurant" });
-// });
-
-// require("./app/routes/auth.routes")(app);
-// require("./app/routes/user.routes")(app)
-
-// // set port, listen for requests
-// const PORT = process.env.PORT || 4200;
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}.`);
-// });
-
-// function initial() {
-//     Role.estimatedDocumentCount((err, count) => {
-//         if(!err && count === 0){
-//             new Role({
-//                 name:"user"
-//             }).save(err => {
-//                 if(err) {
-//                     console.log("error", err);
-//                 }
-//                 console.log("added 'user' to roles collection");
-//             });
-//             new Role({
-//                 name:"admin"
-//             }).save(err => {
-//                 if(err){
-//                     console.log("error", err);
-//                 }
-//                 console.log("added 'admin' to roles collection");
-//             });
-//         }
-//     });
-// }
 
 /*-------------------------------------------------------------------------------------------
 
@@ -149,22 +72,55 @@ app.route("/menu")
       }
     );
   })
-// delete item from db
-.delete((req, res) => {
-  const deleteItem = req.body._id; // receive data from front-end 
-  console.log(deleteItem);  // log out data to check if received
-  MenuItem.findOneAndRemove(
-    {
-      _id: deleteItem     // using method findOneAndRemove to delete _id
-    },
-    function(err, deletedMenuItem){
-      if(deletedMenuItem){
-        res.send(true);
-      } else{
-        res.send(false);
+  // delete item from db
+  .delete((req, res) => {
+    const deleteItem = req.body._id; // receive data from front-end 
+    console.log(deleteItem);  // log out data to check if received
+    MenuItem.findOneAndRemove(
+      {
+        _id: deleteItem     // using method findOneAndRemove to delete _id
+      },
+      function (err, deletedMenuItem) {
+        if (deletedMenuItem) {
+          res.send(true);
+        } else {
+          res.send(false);
+        }
       }
+    )
+  });
+
+/*
+  Create new route to receive data from front-end. 
+  Create new variable to receive _id
+  
+*/
+app.route("/admin/menu/update")
+.get((req, res) => {
+  let updateItem = req.query._id; // receive _id from frontend.
+  console.log(updateItem); //--> log out an ID from selected items
+  MenuItem.findOne({_id: updateItem} , function(err, docs){
+    console.log({_id: updateItem});
+    if(!err){
+      res.send(docs)
+    }else{
+      res.send(err);
     }
-  )
+  });
+  // MenuItem.findById(updateItem, function(err, docs){
+  //   // console.log(updateItem);
+  //   if(err){
+  //     console.log(err);
+  //   }else{
+  //     console.log(docs);
+  //     res.send(docs);
+  //   }
+  // })
+
+  /*
+    findById() is restrictly find by only that ID. If requirement is findById(),
+    we must use findById. Otherwise, use findOne() or find()
+  */
 });
 
 
