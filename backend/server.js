@@ -151,9 +151,11 @@ app.route("/menu")
   })
 // delete item from db
 .delete((req, res) => {
+  const deleteItem = req.body._id; // receive data from front-end 
+  console.log(deleteItem);  // log out data to check if received
   MenuItem.findOneAndRemove(
     {
-      _id:req.params.id
+      _id: deleteItem     // using method findOneAndRemove to delete _id
     },
     function(err, deletedMenuItem){
       if(deletedMenuItem){
@@ -162,7 +164,6 @@ app.route("/menu")
         res.send(false);
       }
     }
-    
   )
 });
 
