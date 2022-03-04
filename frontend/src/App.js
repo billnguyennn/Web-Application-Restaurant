@@ -9,7 +9,7 @@ import Admin from "./component/Pages/Admin";
 import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
 import TableMenuAdmin from "./component/Admin/TableMenuAdmin";
 import NavbarAdmin from "./component/Navbar/NavbarAdmin";
-
+import FunctionUpdateItem from "./component/FunctionAdmin/FunctionUpdateItem";
 function App() {
 
   const logIn = localStorage.getItem('logInStatus');
@@ -27,6 +27,7 @@ function App() {
           <Route path="admin" element={<Admin />} />
           <Route path="admin/add" element={<FunctionAddItem />} />
           <Route path="admin/menu" element={<TableMenuAdmin />} />
+          <Route path="admin/menu/update/:id" element={<FunctionUpdateItem />} />
         </Routes>
       </BrowserRouter>
 

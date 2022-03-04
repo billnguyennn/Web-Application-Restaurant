@@ -16,16 +16,18 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 function BasicTable() {
-
+    
     // useState to query menu from db to show every item on the menu
     const [menuItems, setMenuItems] = useState();
     // useState to update state of a method. in this case 
     // useState was used to delete an item from menu
     const [menuDeletes, setMenuDeletes] = useState();
+
     useEffect(async () => {
         const response = await axios.get("http://localhost:4200/menu");
         setMenuItems(response);
@@ -38,6 +40,11 @@ function BasicTable() {
             setMenuDeletes(deletedMenuItem);
     }
     
+    // Update button to update route.
+    const navigate = useNavigate();
+    let updateItem =  (e) => {
+        return navigate("/admin/menu/update/" + e._id); // route + id of element chose when clicked
+    } 
 
     return (
         <ThemeProvider theme={theme}>
@@ -89,7 +96,7 @@ function BasicTable() {
                                             >
                                                 Delete
                                             </Button>
-                                            <Button variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
+                                            <Button onClick={() => updateItem(row)} variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
                                             >
                                                 Update
                                             </Button>
