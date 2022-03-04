@@ -36,7 +36,7 @@ function AddItem() {
       description: data.get('description'),
       image: data.get('image'),
     });
-    console.log(newMenuItems);
+    // console.log(newMenuItems);
     if (newMenuItems.data === true) {
       return navigate("/admin");
     }else {

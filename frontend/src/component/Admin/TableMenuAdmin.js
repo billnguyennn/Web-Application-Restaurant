@@ -15,20 +15,25 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const theme = createTheme();
 
 function BasicTable() {
 
     const [menuItems, setMenuItems] = useState();
+    const [menuDeletes, setMenuDeletes] = useState();
     useEffect(async () => {
         const response = await axios.get("http://localhost:4200/menu");
         setMenuItems(response);
     })
 
-    let edit = (e) => {
-        alert(e.title)
+   
+    let edit = async (e) => {
+        const deletedMenuItem = await axios.delete('http://localhost:4200/menu');
+        setMenuDeletes(deletedMenuItem);
     }
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -61,7 +66,8 @@ function BasicTable() {
                                     <TableCell align="center">Category</TableCell>
                                     <TableCell align="center">Price&nbsp;</TableCell>
                                     <TableCell align="center">Description&nbsp;</TableCell>
-                                    <TableCell align="center">Edit&nbsp;</TableCell>
+                                    <TableCell align="center">Action&nbsp;</TableCell>
+
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -74,12 +80,17 @@ function BasicTable() {
                                         <TableCell align="center">{row.category}</TableCell>
                                         <TableCell align="center">{row.price}</TableCell>
                                         <TableCell align="center">{row.description}</TableCell>
-                                        <TableCell><Button onClick={() => edit(row)} variant="contained"
-                                            sx={{ mt: 3, ml: 1 }}
-                                        >
-                                            hi
-                                        </Button>
+                                        <TableCell>
+                                            <Button onClick={() => edit(row)} variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
+                                            >
+                                                Delete
+                                            </Button>
+                                            <Button onClick={() => edit(row)} variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
+                                            >
+                                                Update
+                                            </Button>
                                         </TableCell>
+
                                     </TableRow>
                                 ))}
                             </TableBody>
