@@ -21,19 +21,23 @@ const theme = createTheme();
 
 function BasicTable() {
 
+    // useState to query menu from db to show every item on the menu
     const [menuItems, setMenuItems] = useState();
+    // useState to update state of a method. in this case 
+    // useState was used to delete an item from menu
     const [menuDeletes, setMenuDeletes] = useState();
     useEffect(async () => {
         const response = await axios.get("http://localhost:4200/menu");
         setMenuItems(response);
     })
 
-   
-    let edit = async (e) => {
-        const deletedMenuItem = await axios.delete('http://localhost:4200/menu');
-        setMenuDeletes(deletedMenuItem);
+    // Delete button using axios.delete to query to backend
+    let deleteItem =  async (e) => {
+            const deletedMenuItem = await axios.delete('http://localhost:4200/menu',
+            {data: { _id: e._id } });
+            setMenuDeletes(deletedMenuItem);
     }
-
+    
 
     return (
         <ThemeProvider theme={theme}>
@@ -81,11 +85,11 @@ function BasicTable() {
                                         <TableCell align="center">{row.price}</TableCell>
                                         <TableCell align="center">{row.description}</TableCell>
                                         <TableCell>
-                                            <Button onClick={() => edit(row)} variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
+                                            <Button onClick={() => deleteItem(row)} variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
                                             >
                                                 Delete
                                             </Button>
-                                            <Button onClick={() => edit(row)} variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
+                                            <Button variant="outlined" startIcon={<DeleteIcon />} sx={{ mt: 3, ml: 1 }}
                                             >
                                                 Update
                                             </Button>

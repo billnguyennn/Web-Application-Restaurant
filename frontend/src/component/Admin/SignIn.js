@@ -42,7 +42,8 @@ function SignIn() {
       username: data.get('username'),
       password: data.get('password'),
     });
-
+    
+    // this if statement to check if we have a correct Admin username & password
     if (signIn.data === true) {
       localStorage.setItem("logInStatus", true);
       return navigate("/Admin");

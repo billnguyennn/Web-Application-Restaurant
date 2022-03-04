@@ -29,6 +29,7 @@ function AddItem() {
     const data = new FormData(e.target);
     //eslint-disable-next-line no-console
 
+    // This method axios.post to add new item on the menu
     const newMenuItems = await axios.post("http://localhost:4200/menu", {
       title: data.get('title'),
       category: data.get('category'),
@@ -37,6 +38,8 @@ function AddItem() {
       image: data.get('image'),
     });
     // console.log(newMenuItems);
+    // this is to check if we have added new item on the menu, 
+    // and return to the dashboard of admin 
     if (newMenuItems.data === true) {
       return navigate("/admin");
     }else {
