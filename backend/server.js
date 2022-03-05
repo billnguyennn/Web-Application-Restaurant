@@ -89,6 +89,7 @@ app.route("/menu")
       }
     )
   })
+  //Update item from db
   .put((req, res) => {
     const updateItem = req.body;
     // console.log(updateItem);
