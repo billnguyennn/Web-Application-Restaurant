@@ -6,10 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./component/Pages/Home";
 import SignIn from "./component/Admin/SignIn";
 import Admin from "./component/Pages/Admin";
-import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
 import TableMenuAdmin from "./component/Admin/TableMenuAdmin";
 import NavbarAdmin from "./component/Navbar/NavbarAdmin";
 import FunctionUpdateItem from "./component/FunctionAdmin/FunctionUpdateItem";
+import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
+
 function App() {
 
   const logIn = localStorage.getItem('logInStatus');

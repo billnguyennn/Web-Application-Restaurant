@@ -8,15 +8,17 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import MenuUpdateForm from './MenuAddForm';
+import MenuUpdateForm from './MenuUpdateForm';
 import axios from 'axios';
-import { Link, useSearchParams, useParams } from "react-router-dom";
-
+import { Link, useParams , useNavigate} from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 
 const theme = createTheme();
 
 function FunctionUpdateItem() {
+    let navigate = useNavigate();
+    const [form, setForm] = useState();
     // try to search for URL to take ID of an element
     // const [searchParams, setSearchParams] = useSearchParams();
     // searchParams.get("id");
@@ -24,20 +26,33 @@ function FunctionUpdateItem() {
     // const windowUrl = window.location.search;
     // const params = new URLSearchParams(windowUrl);
     // console.log(params['id']);
-    
 
     const routeParams = useParams();
-    console.log(routeParams.id);
+    // console.log(routeParams.id);
     let handleSubmit = async (e) => {
         e.preventDefault();
+        // eslint-disable-next-line
         const data = new FormData(e.target);
         //eslint-disable-next-line no-console
-        
-        const updateMenu = await axios.get("http://localhost:4200/admin/menu/update", 
-        { params: { _id: routeParams.id } })
-        console.log(updateMenu.data);
+        const res = await axios.put('http://localhost:4200/menu', {
+            _id: data.get('_id'),
+            title: data.get('title'),
+            category: data.get('category'),
+            price: data.get('price'),
+            description: data.get('description'),
+            image: data.get('image'),
+        });
+        if(res.data === true){
+            return navigate("/admin/menu");
+        }
     }
-
+   // query db from backend to display on a form
+    useEffect(async () => {
+        const updateMenu = await axios.get("http://localhost:4200/admin/menu/update",
+            { params: { _id: routeParams.id } })
+        setForm(updateMenu.data);
+    }, [])
+    
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -63,10 +78,10 @@ function FunctionUpdateItem() {
                     </Typography>
                     <React.Fragment>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} >
-                            <MenuUpdateForm />
+                            <MenuUpdateForm element={form} />
                             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                                 <Link to="/admin">
-                                    <Button /* onClick={onClicks} */ sx={{ mt: 3, ml: 1 }}>
+                                    <Button sx={{ mt: 3, ml: 1 }}>
                                         Back
                                     </Button>
                                 </Link>

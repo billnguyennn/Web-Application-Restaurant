@@ -37,7 +37,6 @@ function AddItem() {
       description: data.get('description'),
       image: data.get('image'),
     });
-    // console.log(newMenuItems);
     // this is to check if we have added new item on the menu, 
     // and return to the dashboard of admin 
     if (newMenuItems.data === true) {

@@ -88,19 +88,32 @@ app.route("/menu")
         }
       }
     )
-  });
+  })
+  .put((req, res) => {
+    const updateItem = req.body;
+    // console.log(updateItem);
+    MenuItem.findOneAndUpdate(
+      {_id: updateItem._id}, {$set: updateItem}, function(err, update){
+        if(!err){
+          res.send(true);
+        }else{
+          res.send(err);
+        }
+      }
+    )
+  })
 
 /*
-  Create new route to receive data from front-end. 
+  Create new route to receive data from front-end. rs
+
   Create new variable to receive _id
   
 */
 app.route("/admin/menu/update")
 .get((req, res) => {
   let updateItem = req.query._id; // receive _id from frontend.
-  console.log(updateItem); //--> log out an ID from selected items
+  // console.log(updateItem); //--> log out an ID from selected items
   MenuItem.findOne({_id: updateItem} , function(err, docs){
-    console.log({_id: updateItem});
     if(!err){
       res.send(docs)
     }else{

@@ -26,12 +26,14 @@ function BasicTable() {
     const [menuItems, setMenuItems] = useState();
     // useState to update state of a method. in this case 
     // useState was used to delete an item from menu
+    // eslint-disable-next-line
     const [menuDeletes, setMenuDeletes] = useState();
-
+    
+    // This axios.get to display menu on a form.
     useEffect(async () => {
         const response = await axios.get("http://localhost:4200/menu");
         setMenuItems(response);
-    })
+    }, [])
 
     // Delete button using axios.delete to query to backend
     let deleteItem =  async (e) => {
