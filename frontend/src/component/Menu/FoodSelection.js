@@ -39,6 +39,12 @@ const FoodSelection = ({ filterItems }) => {
                 <button className="filter-btn" onClick={() => filterItem('Special')}>
                     Special
                 </button>
+                <button className="filter-btn" onClick={() => filterItem('Drink')}>
+                    Drinks
+                </button>
+                <button className="filter-btn" onClick={() => filterItem('Dessert')}>
+                    Dessert
+                </button>
             </div>
             <Menu selectedFoods={selectedItems} />
         </>

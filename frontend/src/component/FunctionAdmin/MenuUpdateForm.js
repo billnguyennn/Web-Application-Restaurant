@@ -5,11 +5,10 @@ import { useEffect , useState} from 'react';
 
 
  function MenuUpdateForm({element}) {
-  
-  const [form, setForm] = useState()
+  const [form, setForm] = useState(element);
   useEffect(() => {
     setForm(element);
-  },[element])
+  },[element]);
   return (
     <React.Fragment>
       <Grid container spacing={3}>
@@ -26,8 +25,7 @@ import { useEffect , useState} from 'react';
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            type="hidden" // giau TextField  
+          <TextField 
             required
             id="_id"
             name="_id"

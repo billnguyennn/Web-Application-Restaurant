@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuUpdateForm from './MenuUpdateForm';
 import axios from 'axios';
-import { Link, useParams , useNavigate} from "react-router-dom";
+import { Link, useParams, useNavigate} from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 
@@ -18,23 +18,17 @@ const theme = createTheme();
 
 function FunctionUpdateItem() {
     let navigate = useNavigate();
+
     const [form, setForm] = useState();
-    // try to search for URL to take ID of an element
-    // const [searchParams, setSearchParams] = useSearchParams();
-    // searchParams.get("id");
-    // console.log(searchParams.get("id"));
-    // const windowUrl = window.location.search;
-    // const params = new URLSearchParams(windowUrl);
-    // console.log(params['id']);
 
     const routeParams = useParams();
-    // console.log(routeParams.id);
+
     let handleSubmit = async (e) => {
         e.preventDefault();
         // eslint-disable-next-line
         const data = new FormData(e.target);
         //eslint-disable-next-line no-console
-        const res = await axios.put('http://localhost:4200/menu', {
+        const res = await axios.put("http://localhost:4200/menu", {
             _id: data.get('_id'),
             title: data.get('title'),
             category: data.get('category'),
@@ -50,9 +44,9 @@ function FunctionUpdateItem() {
     useEffect(async () => {
         const updateMenu = await axios.get("http://localhost:4200/admin/menu/update",
             { params: { _id: routeParams.id } })
-        setForm(updateMenu.data);
+        setForm(updateMenu.data); 
     }, [])
-    
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />

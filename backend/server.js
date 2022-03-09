@@ -75,7 +75,7 @@ app.route("/menu")
   // delete item from db
   .delete((req, res) => {
     const deleteItem = req.body._id; // receive data from front-end 
-    console.log(deleteItem);  // log out data to check if received
+    // console.log(deleteItem);  // log out data to check if received
     MenuItem.findOneAndRemove(
       {
         _id: deleteItem     // using method findOneAndRemove to delete _id
@@ -121,15 +121,6 @@ app.route("/admin/menu/update")
       res.send(err);
     }
   });
-  // MenuItem.findById(updateItem, function(err, docs){
-  //   // console.log(updateItem);
-  //   if(err){
-  //     console.log(err);
-  //   }else{
-  //     console.log(docs);
-  //     res.send(docs);
-  //   }
-  // })
 
   /*
     findById() is restrictly find by only that ID. If requirement is findById(),
