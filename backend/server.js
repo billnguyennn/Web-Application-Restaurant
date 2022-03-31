@@ -13,6 +13,9 @@ const port = 4200;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 app.set("view engine", "ejs");
 app.use(cors("*"));
@@ -27,6 +30,16 @@ mongoose.connect("mongodb://localhost:27017/restaurantDB", {
   useNewUrlParser: true,
 });
 
+
+// using passport and session
+app.use(session({
+  secret:"this is So Long.",
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());  //passport initialize
+app.use(passport.session());      // use passport to deal with session.
+
 // Schema
 const menuitemSchema = new mongoose.Schema({
   title: String,
@@ -40,9 +53,16 @@ const adminSchema = new mongoose.Schema({
   password: String,
 });
 
+adminSchema.plugin(passportLocalMongoose);
+
 // Should be retrieve
 const MenuItem = mongoose.model("Menuitem", menuitemSchema);
 const Admin = mongoose.model("Admin", adminSchema);
+//use the passport we have
+passport.use(Admin.createStrategy());
+
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
 
 app.route("/menu")
 
