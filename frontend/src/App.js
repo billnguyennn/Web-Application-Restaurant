@@ -1,4 +1,4 @@
-import Navbar from "./component/Navbar/Navbar";
+import UserNavBar from "./component/Navbar/UserNavbar/UserNavBar";
 import './App.css';
 import React from 'react';
 import FoodSelection from "./component/Menu/FoodSelection";
@@ -7,7 +7,7 @@ import Home from "./component/Pages/Home";
 // import SignIn from "./component/Admin/SignIn";
 import Admin from "./component/Pages/Admin";
 import TableMenuAdmin from "./component/Admin/TableMenuAdmin";
-import NavbarAdmin from "./component/Navbar/NavbarAdmin";
+import AdminNavBar from "./component/Navbar/AdminNavbar/AdminNavBar";
 import FunctionUpdateItem from "./component/FunctionAdmin/FunctionUpdateItem";
 import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
 import ValidationSignIn from "./component/Admin/ValidationSignIn"
@@ -21,7 +21,7 @@ function App() {
         
       <BrowserRouter >
         
-        {logIn ? <NavbarAdmin /> : <Navbar />}
+        {logIn ? <AdminNavBar /> : <UserNavBar />}
         <Routes>
           <Route path="menu" element={<FoodSelection />} />
           <Route exact path="/" element={<Home />} />
