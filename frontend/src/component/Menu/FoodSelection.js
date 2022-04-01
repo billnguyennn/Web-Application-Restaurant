@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Menu from './Menu';
+import Menu from './DisplayMenu/Menu';
 import axios from 'axios';
 
 const FoodSelection = ({ filterItems }) => {
@@ -9,7 +9,7 @@ const FoodSelection = ({ filterItems }) => {
     // useState for filter Item.
     const [selectedItems, setSelectedItems] = useState([]);
 
-    // connection for database 
+    // query database to display menu.
     useEffect(async () => {
         const response = await axios.get("http://localhost:4200/menu");
         setMenuItems(response);
@@ -39,7 +39,7 @@ const FoodSelection = ({ filterItems }) => {
                 <button className="filter-btn" onClick={() => filterItem('Special')}>
                     Special
                 </button>
-                <button className="filter-btn" onClick={() => filterItem('Drink')}>
+                <button className="filter-btn" onClick={() => filterItem('Drinks')}>
                     Drinks
                 </button>
                 <button className="filter-btn" onClick={() => filterItem('Dessert')}>

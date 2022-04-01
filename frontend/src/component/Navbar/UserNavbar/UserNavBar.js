@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { NavItemsAdmin } from './NavItemsAdmin';
-import './Navbar.css';
+import { NavItems } from '../NavItems/NavItems';
+import '../Navbar.css';
 import { Link } from 'react-router-dom';
 
-class NavbarAdmin extends Component {
+class Navbar extends Component {
     state ={ clicked: false }
 
     handleClick = () => {
@@ -13,12 +13,14 @@ class NavbarAdmin extends Component {
     render() {
         return (
             <nav className="NavbarItems">
-                <h1 className="navbar-logo"> Welcome, Admin</h1>
+            
+                <h1 className="navbar-logo"> <Link to="/">BB</Link> <i className="fas fa-dragon"></i></h1>
                 <div className="menu-icon" onClick={this.handleClick}>
                     <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+
                 </div>
                 <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
-                    {NavItemsAdmin.map((item, index) => {
+                    {NavItems.map((item, index) => {
                         return (
                             <li key={index}>
                             <Link to={item.url} className={item.cName}> {item.title} </Link>
@@ -31,4 +33,4 @@ class NavbarAdmin extends Component {
     }
 }
 
-export default NavbarAdmin;
+export default Navbar;
