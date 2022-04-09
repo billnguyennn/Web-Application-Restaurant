@@ -11,7 +11,7 @@ import FunctionUpdateItem from "./component/FunctionAdmin/FunctionUpdateItem";
 import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
 import ValidationSignIn from "./component/Admin/ValidationSignIn"
 import Contact from "./component/Pages/Contact";
-
+import Order from "./component/Pages/Order";
 
 function App() {
 
@@ -33,7 +33,7 @@ function App() {
           <Route path="admin/menu/update/:id" element={<FunctionUpdateItem />} />
           <Route path="signin" element={<ValidationSignIn />} />
           <Route path="contact" element={<Contact />} />
-          
+          <Route path="order" element={<Order />} />
         </Routes>
       </BrowserRouter>
 
