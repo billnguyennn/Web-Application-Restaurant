@@ -6,22 +6,12 @@ export const NavItems = [
     },
     {
         title: 'Order Online',
-        url: '#',
-        cName: 'nav-links'
-    },
-    {
-        title: 'Reservation',
-        url: '#',
-        cName: 'nav-links'
-    },
-    {
-        title: 'Hours & Location',
-        url: '#',
+        url: 'order',
         cName: 'nav-links'
     },
     {
         title: 'Contact Us',
-        url: '#',
+        url: 'contact',
         cName: 'nav-links'
     },
     

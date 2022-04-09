@@ -14,8 +14,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const session = require('express-session');
-const passport = require("passport");
-const passportLocalMongoose = require("passport-local-mongoose");
+
 
 app.set("view engine", "ejs");
 app.use(cors("*"));
@@ -31,15 +30,6 @@ mongoose.connect("mongodb://localhost:27017/restaurantDB", {
 });
 
 
-// using passport and session
-app.use(session({
-  secret:"this is So Long.",
-  resave: false,
-  saveUninitialized: false,
-}));
-app.use(passport.initialize());  //passport initialize
-app.use(passport.session());      // use passport to deal with session.
-
 // Schema
 const menuitemSchema = new mongoose.Schema({
   title: String,
@@ -53,16 +43,13 @@ const adminSchema = new mongoose.Schema({
   password: String,
 });
 
-adminSchema.plugin(passportLocalMongoose);
+
 
 // Should be retrieve
 const MenuItem = mongoose.model("Menuitem", menuitemSchema);
 const Admin = mongoose.model("Admin", adminSchema);
-//use the passport we have
-passport.use(Admin.createStrategy());
 
-passport.serializeUser(Admin.serializeUser());
-passport.deserializeUser(Admin.deserializeUser());
+
 
 app.route("/menu")
 
@@ -114,10 +101,10 @@ app.route("/menu")
     const updateItem = req.body;
     // console.log(updateItem);
     MenuItem.findOneAndUpdate(
-      {_id: updateItem._id}, {$set: updateItem}, function(err, update){
-        if(!err){
+      { _id: updateItem._id }, { $set: updateItem }, function (err, update) {
+        if (!err) {
           res.send(true);
-        }else{
+        } else {
           res.send(err);
         }
       }
@@ -131,22 +118,22 @@ app.route("/menu")
   
 */
 app.route("/admin/menu/update")
-.get((req, res) => {
-  let updateItem = req.query._id; // receive _id from frontend.
-  // console.log(updateItem); //--> log out an ID from selected items
-  MenuItem.findOne({_id: updateItem} , function(err, docs){
-    if(!err){
-      res.send(docs)
-    }else{
-      res.send(err);
-    }
-  });
+  .get((req, res) => {
+    let updateItem = req.query._id; // receive _id from frontend.
+    // console.log(updateItem); //--> log out an ID from selected items
+    MenuItem.findOne({ _id: updateItem }, function (err, docs) {
+      if (!err) {
+        res.send(docs)
+      } else {
+        res.send(err);
+      }
+    });
 
-  /*
-    findById() is restrictly find by only that ID. If requirement is findById(),
-    we must use findById. Otherwise, use findOne() or find()
-  */
-});
+    /* 
+      findById() is restrictly find by only that ID. If requirement is findById(),
+      we must use findById. Otherwise, use findOne() or find()
+    */
+  });
 
 
 app.route("/admin").post((req, res) => {
