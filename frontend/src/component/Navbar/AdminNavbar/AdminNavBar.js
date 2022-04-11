@@ -3,8 +3,12 @@ import { NavItemsAdmin } from '../NavItems/NavItemsAdmin';
 import '../Navbar.css';
 import { Link } from 'react-router-dom';
 
+
 class AdminNavBar extends Component {
-    state ={ clicked: false }
+
+    
+    state = { clicked: false }
+
 
     handleClick = () => {
         this.setState({ clicked: !this.state.clicked })
@@ -21,7 +25,7 @@ class AdminNavBar extends Component {
                     {NavItemsAdmin.map((item, index) => {
                         return (
                             <li key={index}>
-                            <Link to={item.url} className={item.cName}> {item.title} </Link>
+                                <Link to={item.url} className={item.cName}> {item.title} </Link>
                             </li>
                         )
                     })}

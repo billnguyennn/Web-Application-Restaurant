@@ -14,6 +14,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const session = require('express-session');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 
 app.set("view engine", "ejs");
@@ -154,4 +156,3 @@ app.listen(port, () => {
 
 
 
-// Admin.js / User.js
