@@ -16,11 +16,42 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import IconButton from '@mui/material/IconButton';
 
 const theme = createTheme();
 function Order() {
 
     const [menu, setMenu] = useState();
+    const [chooseItems, setChooseItems] = useState({});
+
+    /*  Add item to cart button 
+    Check if the id of the item selected === undefined
+    set the id of the item = 1;
+    else (!=== undefined), increment the value of the item;
+    */
+    function increase(row) {
+        if(chooseItems[row._id] === undefined){
+            // chooseItems[row._id] = 1;
+            setChooseItems({ ...chooseItems, [row._id] : 1 });
+        }else{
+            // chooseItems[row._id] = chooseItems[row._id] + 1;
+            setChooseItems({ ...chooseItems, [row._id] : chooseItems[row._id] + 1 });
+        }
+        console.log(chooseItems);
+    }
+
+    /*  Delete item in the cart button
+    Check if the id has already in the object --> decrease the value of the item.
+    */
+
+    function decrease(row) {
+        if(chooseItems[row._id]){
+            setChooseItems({...chooseItems, [row._id] : chooseItems[row._id] - 1 })
+        }
+        console.log(chooseItems);
+    }
+
 
     useEffect(async () => {
         const response = await axios.get("http://localhost:4200/menu")
@@ -46,7 +77,10 @@ function Order() {
                 </Toolbar>
             </AppBar>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-                <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+                <Paper variant="outlined" align="right" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+                <IconButton color="primary" aria-label="add to shopping cart">
+                    <AddShoppingCartIcon />
+                </IconButton>
                     <Typography component="h1" variant="h4" align="center">
                         Menu
                     </Typography>
@@ -58,8 +92,9 @@ function Order() {
                                     <TableCell align="center">Category</TableCell>
                                     <TableCell align="center">Price&nbsp;</TableCell>
                                     <TableCell align="center">Description&nbsp;</TableCell>
-                                    <TableCell align="center">Action&nbsp;</TableCell>
-
+                                    <TableCell align="center">Delete&nbsp;</TableCell>
+                                    <TableCell align="center"> Quantity </TableCell>
+                                    <TableCell align="center"> Add</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -73,13 +108,18 @@ function Order() {
                                         <TableCell align="center">{row.price}</TableCell>
                                         <TableCell align="center">{row.description}</TableCell>
                                         <TableCell>
-                                            <Fab size="small" color="secondary" aria-label="add">
+                                            <Fab size="small" color="secondary" aria-label="add" onClick={() => decrease(row)}>
                                                 <AddIcon />
                                             </Fab>
-                                            
-                                            <Fab size="small" color="secondary" aria-label="add">
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            {chooseItems[row._id] ? chooseItems[row._id] : 0}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Fab size="small" color="secondary" aria-label="add" onClick={() => increase(row)}>
                                                 <AddIcon />
-                                            </Fab></TableCell>
+                                            </Fab>
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
