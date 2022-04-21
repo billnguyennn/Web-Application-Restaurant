@@ -1,5 +1,10 @@
 export const NavItemsAdmin = [
     {
+        title: 'Home',
+        url: 'admin',
+        cName: 'nav-links'
+    },
+    {
         title: 'Add New Menu Item',
         url: 'admin/add',
         cName: 'nav-links'
@@ -9,10 +14,5 @@ export const NavItemsAdmin = [
         url: 'admin/menu',
         cName: 'nav-links'
     },
-    {
-        title: 'View Transaction',
-        url: '#',
-        cName: 'nav-links'
-    }
     
 ]
