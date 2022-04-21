@@ -16,10 +16,21 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const theme = createTheme();
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        right: -3,
+        top: 13,
+        border: `2px solid ${theme.palette.background.paper}`,
+        padding: '0 4px',
+    },
+}));
 function Order() {
 
     const [menu, setMenu] = useState();
@@ -31,12 +42,12 @@ function Order() {
     else (!=== undefined), increment the value of the item;
     */
     function increase(row) {
-        if(chooseItems[row._id] === undefined){
+        if (chooseItems[row._id] === undefined) {
             // chooseItems[row._id] = 1;
-            setChooseItems({ ...chooseItems, [row._id] : 1 });
-        }else{
+            setChooseItems({ ...chooseItems, [row._id]: 1 });
+        } else {
             // chooseItems[row._id] = chooseItems[row._id] + 1;
-            setChooseItems({ ...chooseItems, [row._id] : chooseItems[row._id] + 1 });
+            setChooseItems({ ...chooseItems, [row._id]: chooseItems[row._id] + 1 });
         }
         console.log(chooseItems);
     }
@@ -46,8 +57,8 @@ function Order() {
     */
 
     function decrease(row) {
-        if(chooseItems[row._id]){
-            setChooseItems({...chooseItems, [row._id] : chooseItems[row._id] - 1 })
+        if (chooseItems[row._id]) {
+            setChooseItems({ ...chooseItems, [row._id]: chooseItems[row._id] - 1 })
         }
         console.log(chooseItems);
     }
@@ -78,9 +89,11 @@ function Order() {
             </AppBar>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
                 <Paper variant="outlined" align="right" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-                <IconButton color="primary" aria-label="add to shopping cart">
-                    <AddShoppingCartIcon />
-                </IconButton>
+                    <IconButton aria-label="cart">
+                        <StyledBadge badgeContent={0} color="secondary">
+                            <ShoppingCartIcon />
+                        </StyledBadge>
+                    </IconButton>
                     <Typography component="h1" variant="h4" align="center">
                         Menu
                     </Typography>
@@ -108,8 +121,8 @@ function Order() {
                                         <TableCell align="center">{row.price}</TableCell>
                                         <TableCell align="center">{row.description}</TableCell>
                                         <TableCell>
-                                            <Fab size="small" color="secondary" aria-label="add" onClick={() => decrease(row)}>
-                                                <AddIcon />
+                                            <Fab size="small" color="secondary" onClick={() => decrease(row)}>
+                                                <RemoveIcon />
                                             </Fab>
                                         </TableCell>
                                         <TableCell align="center">

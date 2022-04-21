@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuUpdateForm from './MenuUpdateForm';
 import axios from 'axios';
-import { Link, useParams, useNavigate} from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 
@@ -36,16 +36,23 @@ function FunctionUpdateItem() {
             description: data.get('description'),
             image: data.get('image'),
         });
-        if(res.data === true){
+        if (res.data === true) {
             return navigate("/admin/menu");
         }
     }
-   // query db from backend to display on a form
+    // query db from backend to display on a form
     useEffect(async () => {
         const updateMenu = await axios.get("http://localhost:4200/admin/menu/update",
             { params: { _id: routeParams.id } })
-        setForm(updateMenu.data); 
+        setForm(updateMenu.data);
     }, [])
+
+    // Check if they have credential to access the admin page
+    useEffect(() => {
+        if (!localStorage.getItem('logInStatus')) {
+            return navigate("/signin");
+        }
+    });
 
     return (
         <ThemeProvider theme={theme}>

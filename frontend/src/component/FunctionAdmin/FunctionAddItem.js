@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuAddForm from './MenuAddForm';
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
+import { useEffect } from 'react';
 
 
 
@@ -41,10 +42,18 @@ function AddItem() {
     // and return to the dashboard of admin 
     if (newMenuItems.data === true) {
       return navigate("/admin");
-    }else {
+    } else {
       return navigate("/");
     }
   }
+
+  // Check if they have credential to access the admin page
+  useEffect(() => {
+    if (!localStorage.getItem('logInStatus')) {
+      return navigate("/signin");
+    }
+  });
+
 
   return (
     <ThemeProvider theme={theme}>
