@@ -17,7 +17,7 @@ const Menu = ({ selectedFoods }) => {
                         return <article key={_id} className="menu-item">
 
                             {image ? <img src={process.env.PUBLIC_URL + image} alt={title} className='photo' /> :
-                                <img src={process.env.PUBLIC_URL + "/images/ROASTED-QUAIL.jpg"} alt={title} className='photo' />}
+                                <img src={process.env.PUBLIC_URL + "/images/Boston.jpg"} alt={title} className='photo' />}
                             <div className="item-info">
                                 <header>
                                     <h4>{title}</h4>

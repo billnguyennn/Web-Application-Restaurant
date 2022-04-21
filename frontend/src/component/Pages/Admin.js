@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const mdTheme = createTheme();
 
@@ -55,7 +56,11 @@ function DashboardContent() {
                                             height: 240,
                                         }}
                                     >
-                                        Hi
+                                        <Container maxWidth="sm">
+                                            <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
+                                                Welcome, Admin
+                                            </Typography>
+                                        </Container>
                                     </Paper>
                                 </Grid>
                             </Grid>
