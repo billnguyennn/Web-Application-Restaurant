@@ -19,16 +19,6 @@ export default function MenuForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="category"
-            name="category"
-            label="Category"
-            fullWidth
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
             id="price"
             name="price"
             label="Price"
@@ -36,12 +26,12 @@ export default function MenuForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} >
           <TextField
             required
-            id="image"
-            name="image"
-            label="Image"
+            id="category"
+            name="category"
+            label="Category"
             fullWidth
             variant="standard"
           />
