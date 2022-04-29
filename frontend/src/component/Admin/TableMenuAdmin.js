@@ -17,36 +17,36 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-
+import {env} from '../../env'
 const theme = createTheme();
 
 function BasicTable() {
-    
+
     // useState to query menu from db to show every item on the menu
     const [menuItems, setMenuItems] = useState();
     // useState to update state of a method. in this case 
     // useState was used to delete an item from menu
     // eslint-disable-next-line
     const [menuDeletes, setMenuDeletes] = useState();
-    
+
     // This axios.get to display menu on a form.
     useEffect(async () => {
-        const response = await axios.get("http://localhost:4200/menu");
+        const response = await axios.get(env.API_HOST + "/menu");
         setMenuItems(response);
     }, [])
 
     // Delete button using axios.delete to query to backend
-    let deleteItem =  async (e) => {
-            const deletedMenuItem = await axios.delete('http://localhost:4200/menu',
-            {data: { _id: e._id } });
-            setMenuDeletes(deletedMenuItem);
+    let deleteItem = async (e) => {
+        const deletedMenuItem = await axios.delete(env.API_HOST + '/menu',
+            { data: { _id: e._id } });
+        setMenuDeletes(deletedMenuItem);
     }
-    
+
     // Update button to update route.
     const navigate = useNavigate();
-    let updateItem =  (e) => {
+    let updateItem = (e) => {
         return navigate("/admin/menu/update/" + e._id); // route + id of element chose when clicked
-    } 
+    }
 
     // Check if they have credential to access the admin page
     useEffect(() => {

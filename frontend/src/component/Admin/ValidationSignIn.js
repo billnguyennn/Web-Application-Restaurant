@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import {env} from '../../env'
 
 const theme = createTheme();
 
@@ -21,7 +21,7 @@ function SignIn() {
     const onSubmit = async (event) => {
         
         //query db
-        const signIn = await axios.post("http://localhost:4200/admin", {
+        const signIn = await axios.post(env.API_HOST + '/admin', {
             username: event.username,
             password: event.password,
         });

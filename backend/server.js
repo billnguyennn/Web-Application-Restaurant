@@ -142,7 +142,7 @@ app.route("/admin").post((req, res) => {
   const username = req.body.username;
   const pw = req.body.password;
   Admin.findOne({ username: username }, function (err, foundAdmins) {
-    if (foundAdmins && foundAdmins.password === pw) {
+    if (foundAdmins && bcrypt.compareSync(pw, foundAdmins.password)) {
       res.send(true);
     } else {
       res.send(false);

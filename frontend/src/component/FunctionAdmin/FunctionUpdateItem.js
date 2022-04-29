@@ -12,7 +12,7 @@ import MenuUpdateForm from './MenuUpdateForm';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
-
+import {env} from '../../env'
 
 const theme = createTheme();
 
@@ -28,7 +28,7 @@ function FunctionUpdateItem() {
         // eslint-disable-next-line
         const data = new FormData(e.target);
         //eslint-disable-next-line no-console
-        const res = await axios.put("http://localhost:4200/menu", {
+        const res = await axios.put(env.API_HOST + "/menu", {
             _id: data.get('_id'),
             title: data.get('title'),
             category: data.get('category'),
@@ -42,7 +42,7 @@ function FunctionUpdateItem() {
     }
     // query db from backend to display on a form
     useEffect(async () => {
-        const updateMenu = await axios.get("http://localhost:4200/admin/menu/update",
+        const updateMenu = await axios.get(env.API_HOST + "/admin/menu/update",
             { params: { _id: routeParams.id } })
         setForm(updateMenu.data);
     }, [])

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './DisplayMenu/Menu';
 import axios from 'axios';
+import {env} from '../../env'
 
 const FoodSelection = ({ filterItems }) => {
 
@@ -11,7 +12,7 @@ const FoodSelection = ({ filterItems }) => {
 
     // query database to display menu.
     useEffect(async () => {
-        const response = await axios.get("http://localhost:4200/menu");
+        const response = await axios.get(env.API_HOST + "/menu");
         setMenuItems(response);
         setSelectedItems(response.data);
     }, []);

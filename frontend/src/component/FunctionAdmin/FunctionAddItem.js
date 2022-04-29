@@ -12,7 +12,7 @@ import MenuAddForm from './MenuAddForm';
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from 'react';
-
+import {env} from '../../env'
 
 
 const theme = createTheme();
@@ -31,7 +31,7 @@ function AddItem() {
     //eslint-disable-next-line no-console
 
     // This method axios.post to add new item on the menu
-    const newMenuItems = await axios.post("http://localhost:4200/menu", {
+    const newMenuItems = await axios.post(env.API_HOST + "/menu", {
       title: data.get('title'),
       category: data.get('category'),
       price: data.get('price'),
