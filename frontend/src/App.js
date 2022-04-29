@@ -26,7 +26,6 @@ function App() {
         <Routes>
           <Route path="menu" element={<FoodSelection />} />
           <Route exact path="/" element={<Home />} />
-          {/* <Route path="signin" element={<SignIn />} /> */}
           <Route path="admin" element={<Admin />} />
           <Route path="admin/add" element={<FunctionAddItem />} />
           <Route path="admin/menu" element={<TableMenuAdmin />} />

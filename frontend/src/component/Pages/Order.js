@@ -65,7 +65,7 @@ function Order() {
 
 
     useEffect(async () => {
-        const response = await axios.get("http://localhost:4200/menu")
+        const response = await axios.get(env.API_HOST + "/menu")
         setMenu(response);
     }, []);
 
