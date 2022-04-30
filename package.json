@@ -5,7 +5,7 @@
   "scripts": {
     "install": "npm i --prefix backend && npm i --prefix frontend",
     "start:backend": "npx cross-env-shell \"cd ./backend && npm start\"",
-    "start:frontend": "npx cross-env-shell \"cd ./frontend && npm start\"",
+    "start:frontend": "npx cross-env-shell \"cd ./frontend && npm run start:heroku\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
