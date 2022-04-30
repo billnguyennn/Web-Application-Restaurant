@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "start": "node ./src/server.js",
+    "start": "cross-env-shell NODE_ENV=production node ./src/server.js",
     "dev": "node -r dotenv/config  ./src/server.js dotenv_config_path=.env.dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

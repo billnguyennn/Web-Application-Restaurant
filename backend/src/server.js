@@ -150,8 +150,9 @@ app.route("/admin").post((req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log("Server is running on port 4200");
+const appBinding = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
+app.listen(port, appBinding, () => {
+  console.log("Server is running on port " + appBinding + ":4200");
 });
 
 
