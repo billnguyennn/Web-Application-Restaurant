@@ -1,0 +1,24 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "install": "npm i --prefix backend && npm i --prefix frontend",
+    "start:backend": "cross-env-shell \"cd ./backend && npm start\"",
+    "start:frontend": "cross-env-shell \"cd ./frontend && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billnguyen1410/Capstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billnguyen1410/Capstone/issues"
+  },
+  "homepage": "https://github.com/billnguyen1410/Capstone#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
