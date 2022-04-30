@@ -2,12 +2,12 @@
   "name": "restaurant",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
     "start:heroku": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "heroku-postbuild": "npx react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
