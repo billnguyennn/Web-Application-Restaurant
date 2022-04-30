@@ -16,7 +16,7 @@ const cors = require("cors");
 const session = require('express-session');
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
+require('dotenv').config();
 
 app.set("view engine", "ejs");
 app.use(cors("*"));
@@ -27,7 +27,8 @@ app.use(
 );
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/restaurantDB", {
+// mongoose.connect("mongodb://localhost:27017/restaurantDB", {
+mongoose.connect(process.env.MONGO_CONN, {
   useNewUrlParser: true,
 });
 

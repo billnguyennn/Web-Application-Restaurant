@@ -21,6 +21,7 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {env} from '../../env';
 
 const theme = createTheme();
 const StyledBadge = styled(Badge)(({ theme }) => ({
