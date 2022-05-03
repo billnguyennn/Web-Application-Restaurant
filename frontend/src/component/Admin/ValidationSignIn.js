@@ -30,7 +30,9 @@ function SignIn() {
         if (signIn.data === true) {
             localStorage.setItem("logInStatus", true);
             return navigate("/Admin");
-        };
+        }else{
+            alert("Wrong password");
+        }
     };
 
     return (
