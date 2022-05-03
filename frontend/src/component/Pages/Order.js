@@ -21,7 +21,10 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {env} from '../../env';
+import { env } from '../../env';
+import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 const theme = createTheme();
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -36,7 +39,7 @@ function Order() {
 
     const [menu, setMenu] = useState();
     const [chooseItems, setChooseItems] = useState({});
-
+    const navigate = useNavigate();
     /*  Add item to cart button 
     Check if the id of the item selected === undefined
     set the id of the item = 1;
@@ -50,9 +53,7 @@ function Order() {
             // chooseItems[row._id] = chooseItems[row._id] + 1;
             setChooseItems({ ...chooseItems, [row._id]: chooseItems[row._id] + 1 });
         }
-        console.log(chooseItems);
     }
-
     /*  Delete item in the cart button
     Check if the id has already in the object --> decrease the value of the item.
     */
@@ -61,15 +62,16 @@ function Order() {
         if (chooseItems[row._id]) {
             setChooseItems({ ...chooseItems, [row._id]: chooseItems[row._id] - 1 })
         }
-        console.log(chooseItems);
     }
-
 
     useEffect(async () => {
         const response = await axios.get(env.API_HOST + "/menu")
         setMenu(response);
     }, []);
 
+    let onSubmitOrder = () => {
+        return navigate("/");
+    }
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -140,6 +142,11 @@ function Order() {
                         </Table>
                     </TableContainer>
                 </Paper>
+                <Grid align="center">
+                    <Button variant="contained" onClick={(onSubmitOrder)} >
+                        Submit Your Order
+                    </Button>
+                </Grid>
             </Container>
         </ThemeProvider>
     );

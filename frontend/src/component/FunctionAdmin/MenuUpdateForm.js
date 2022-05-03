@@ -2,7 +2,7 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useEffect , useState} from 'react';
-
+import '../FunctionAdmin/menu.css'
 
  function MenuUpdateForm({element}) {
   const [form, setForm] = useState(element);
@@ -25,17 +25,6 @@ import { useEffect , useState} from 'react';
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField 
-            required
-            id="_id"
-            name="_id"
-            label="_id"
-            fullWidth
-            variant="standard"
-            value={form ? form._id : ""}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="category"
@@ -47,7 +36,7 @@ import { useEffect , useState} from 'react';
             onChange={e => setForm({...form  , category: e.target.value})}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             required
             id="price"
@@ -57,18 +46,6 @@ import { useEffect , useState} from 'react';
             variant="standard"
             value={form ? form.price : ""}
             onChange={e => setForm({...form  , price: e.target.value})}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="image"
-            name="image"
-            label="Image"
-            fullWidth
-            variant="standard"
-            value={form ? form.image : ""}
-            onChange={e => setForm({...form  , image: e.target.value})}
           />
         </Grid>
         <Grid item xs={12}>
@@ -82,7 +59,16 @@ import { useEffect , useState} from 'react';
             onChange={e => setForm({...form  , description: e.target.value})}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6} className="hide">
+          <TextField 
+            required
+            id="_id"
+            name="_id"
+            label="_id"
+            fullWidth
+            variant="standard"
+            value={form ? form._id : ""}
+          />
         </Grid>
       </Grid>
     </React.Fragment>

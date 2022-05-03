@@ -12,7 +12,6 @@ import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
 import ValidationSignIn from "./component/Admin/ValidationSignIn"
 import Contact from "./component/Pages/Contact";
 import Order from "./component/Pages/Order";
-
 function App() {
 
   const logIn = localStorage.getItem('logInStatus');
