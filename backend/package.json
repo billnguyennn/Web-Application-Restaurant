@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-  },
-  "devDependencies": {
+    "bcrypt": "^5.0.1"
   }
 }

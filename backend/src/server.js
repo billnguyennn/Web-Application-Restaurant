@@ -45,12 +45,23 @@ const adminSchema = new mongoose.Schema({
   password: String,
 });
 
+const userSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+  firstname: String,
+  lastname: String,
+});
+
+const orderedSchema = new mongoose.Schema({
+  id: String,
+  quantity: Number,
+})
 
 
 // Should be retrieve
 const MenuItem = mongoose.model("Menuitem", menuitemSchema);
 const Admin = mongoose.model("Admin", adminSchema);
-
+const User = mongoose.model("User", userSchema);
 
 
 app.route("/menu")
@@ -84,7 +95,6 @@ app.route("/menu")
   // delete item from db
   .delete((req, res) => {
     const deleteItem = req.body._id; // receive data from front-end 
-    // console.log(deleteItem);  // log out data to check if received
     MenuItem.findOneAndRemove(
       {
         _id: deleteItem     // using method findOneAndRemove to delete _id
@@ -101,7 +111,6 @@ app.route("/menu")
   //Update item from db
   .put((req, res) => {
     const updateItem = req.body;
-    // console.log(updateItem);
     MenuItem.findOneAndUpdate(
       { _id: updateItem._id }, { $set: updateItem }, function (err, update) {
         if (!err) {
@@ -137,6 +146,11 @@ app.route("/admin/menu/update")
     */
   });
 
+// app.route("/order").post((req, res) => {
+//   const id = req.body._id;
+//   const quantity = req.body.quantity;
+//   console.log(quantity);
+// })
 
 app.route("/admin").post((req, res) => {
   const username = req.body.username;
@@ -150,10 +164,32 @@ app.route("/admin").post((req, res) => {
   });
 });
 
+app.route("/user")
+.post((req, res) => {
+  const username = req.body.username;
+  const pws = req.body.password;
+  User.findOne({ username: username }, function (err, foundUser) {
+    if (foundUser && foundUser.password === pws) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  })
+})
+  
+  app.route("/usersignup")
+  .post( async (req, res) => {
+    const addNewUser = req.body;
+    User.create({ ...addNewUser}, function(err, foundUsers){
+      if(foundUsers){
+        res.send(true);
+      }else{
+        res.send(false);
+      }
+    })
+  })
+
 const appBinding = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
 app.listen(port, appBinding, () => {
   console.log("Server is running on port " + appBinding + ":" + port);
 });
-
-
-

@@ -39,6 +39,7 @@ function Order() {
 
     const [menu, setMenu] = useState();
     const [chooseItems, setChooseItems] = useState({});
+    const [selectItems, setSelectItems] = useState();
     const navigate = useNavigate();
     /*  Add item to cart button 
     Check if the id of the item selected === undefined
@@ -46,32 +47,40 @@ function Order() {
     else (!=== undefined), increment the value of the item;
     */
     function increase(row) {
-        if (chooseItems[row._id] === undefined) {
+        if (chooseItems[row._id] === undefined && chooseItems[row.title] === undefined) {
             // chooseItems[row._id] = 1;
-            setChooseItems({ ...chooseItems, [row._id]: 1 });
+            setChooseItems({ ...chooseItems, [row._id]: 1 , [row.title]: 1});
         } else {
             // chooseItems[row._id] = chooseItems[row._id] + 1;
-            setChooseItems({ ...chooseItems, [row._id]: chooseItems[row._id] + 1 });
+            setChooseItems({ ...chooseItems, [row._id]: chooseItems[row._id] + 1, [row.title]: chooseItems[row.title] +1});
         }
     }
+    
     /*  Delete item in the cart button
     Check if the id has already in the object --> decrease the value of the item.
     */
-
     function decrease(row) {
         if (chooseItems[row._id]) {
             setChooseItems({ ...chooseItems, [row._id]: chooseItems[row._id] - 1 })
         }
     }
-
     useEffect(async () => {
         const response = await axios.get(env.API_HOST + "/menu")
         setMenu(response);
     }, []);
-
-    let onSubmitOrder = () => {
-        return navigate("/");
+console.log(chooseItems);
+    // let onSubmitOrder =  async (e) => {
+        
+    //     const selectedItems = await axios.post(env.API_HOST + "/order", {
+    //         data: { _id: e._id, quantity: e.quantity }
+    //     })
+    //     setSelectItems(selectedItems);
+        
+    // }
+    let onSubmitOrder = (e) => {
+        return navigate('/');
     }
+    
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -143,7 +152,7 @@ function Order() {
                     </TableContainer>
                 </Paper>
                 <Grid align="center">
-                    <Button variant="contained" onClick={(onSubmitOrder)} >
+                    <Button variant="contained" onClick={onSubmitOrder} >
                         Submit Your Order
                     </Button>
                 </Grid>

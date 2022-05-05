@@ -51,7 +51,7 @@ function BasicTable() {
     // Check if they have credential to access the admin page
     useEffect(() => {
         if (!localStorage.getItem('logInStatus')) {
-            return navigate("/signin");
+            return navigate("/admin/signin");
         }
     });
 

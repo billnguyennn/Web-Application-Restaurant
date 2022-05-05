@@ -14,5 +14,10 @@ export const NavItems = [
         url: 'contact',
         cName: 'nav-links'
     },
+    {
+        title:'SignIn',
+        url: 'signin',
+        cName: 'nav-links'
+    }
     
 ]

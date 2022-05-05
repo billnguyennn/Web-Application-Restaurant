@@ -12,6 +12,8 @@ import FunctionAddItem from "./component/FunctionAdmin/FunctionAddItem";
 import ValidationSignIn from "./component/Admin/ValidationSignIn"
 import Contact from "./component/Pages/Contact";
 import Order from "./component/Pages/Order";
+import User from "./component/Pages/User";
+import SignUp from "./component/Pages/SignUp";
 function App() {
 
   const logIn = localStorage.getItem('logInStatus');
@@ -29,9 +31,11 @@ function App() {
           <Route path="admin/add" element={<FunctionAddItem />} />
           <Route path="admin/menu" element={<TableMenuAdmin />} />
           <Route path="admin/menu/update/:id" element={<FunctionUpdateItem />} />
-          <Route path="signin" element={<ValidationSignIn />} />
+          <Route path="admin/signin" element={<ValidationSignIn />} />
           <Route path="contact" element={<Contact />} />
           <Route path="order" element={<Order />} />
+          <Route path="signin" element={<User />} />
+          <Route path="signup" element ={<SignUp /> } />
         </Routes>
       </BrowserRouter>
 
@@ -39,5 +43,8 @@ function App() {
 
   );
 }
+
+
+// use filter from foodselection for cart with chooseItem
 
 export default App;
